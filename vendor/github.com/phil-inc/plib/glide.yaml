@@ -1,0 +1,42 @@
+package: github.com/phil-inc/plib
+import:
+- package: github.com/dgrijalva/jwt-go
+  version: v3.0.0
+- package: github.com/garyburd/redigo
+  version: v1.0.0
+  subpackages:
+  - redis
+- package: github.com/julienschmidt/httprouter
+  version: v1.1
+- package: github.com/narup/gconfig
+  version: f3aead6e6d3dbb0e1c98ea8e251cec6f9d09c399
+- package: github.com/narup/gmgo
+  version: a25fe5091fb7c86763eb9eb26e1169339d6cdf1d
+- package: github.com/pkg/errors
+  version: v0.7.1
+- package: golang.org/x/crypto
+  version: 81e90905daefcd6fd217b62423c0908922eadb30
+  subpackages:
+  - bcrypt
+- package: gopkg.in/mgo.v2
+  version: 3f83fa5005286a7fe593b055f0d7771a7dce4655
+  subpackages:
+  - bson
+- package: gopkg.in/tomb.v2
+  version: d5d1b5820637886def9eef33e03a27a9f166942c
+- package: github.com/bamzi/jobrunner
+  version: 273175f8b6ebabab8a639a4e6260a5c50fbf016a
+- package: github.com/mreiferson/go-snappystream
+  version: v0.2.3
+- package: github.com/gorilla/context
+  version: v1.1
+- package: github.com/justinas/alice
+  version: 1051eaf52fcafdd87ead59d28b065f1fcb8274ec
+- package: github.com/gorilla/handlers
+  version: v1.2
+- package: github.com/lib/pq
+  version: dd1fe2071026ce53f36a39112e645b4d4f5793a4
+- package: golang.org/x/sys
+  version: e42485b6e20ae7d2304ec72e535b103ed350cc02
+  subpackages:
+  - unix
