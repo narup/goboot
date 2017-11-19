@@ -1,7 +1,0 @@
-vendor/
-.idea/
-.vscode/
-.DS_Store
-core/.DS_Store
-core/data/.DS_Store
-core/service/.DS_Store
