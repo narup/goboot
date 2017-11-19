@@ -1,2 +1,3 @@
-# pweb
-Ultra-light micro web-framework in Go
+# Aliz
+Ultralight Go web framework for writing microservices
+
