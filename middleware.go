@@ -226,7 +226,7 @@ func checkJWT(w http.ResponseWriter, r *http.Request, secretAuthToken string) (j
 	return nil, errors.New("Invalid auth token")
 }
 
-// extractAPIKeyFromAuthHeader extract Phil API Key from the header
+// extractAPIKeyFromAuthHeader extract API Key from the header
 func extractAPIKeyFromAuthHeader(r *http.Request) (string, error) {
 	authHeaderParts, err := getAuthHeaderParts(r)
 	if err != nil {

@@ -52,7 +52,7 @@ Ultralight Go web framework for writing microservices
  
  func main() {
  	port := "8080"
-	fmt.Printf("Starting phil API server on port: %s.... %s \n", port)
+	fmt.Printf("Starting server on port: %s.... %s \n", port)
 	log.Println("Press ctrl+E to stop the server.")
 	srv := &http.Server{
 		Handler:      handlers(),

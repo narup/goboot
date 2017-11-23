@@ -45,7 +45,6 @@ import (
 
 	jwt "github.com/dgrijalva/jwt-go"
 	"github.com/julienschmidt/httprouter"
-	"github.com/phil-inc/plib/core/util"
 )
 
 type sessionUser struct {
@@ -226,7 +225,7 @@ func RequestBody(r *http.Request) interface{} {
 
 // SessionUserID returns user id of the current session
 func SessionUserID(r *http.Request) string {
-	if jwtClaims, ok := r.Context().Value(util.SessionUserKey).(jwt.MapClaims); ok {
+	if jwtClaims, ok := r.Context().Value(SessionUserKey).(jwt.MapClaims); ok {
 		return jwtClaims["uid"].(string)
 	}
 	return ""
@@ -234,7 +233,7 @@ func SessionUserID(r *http.Request) string {
 
 // UserRoles current user roles
 func UserRoles(r *http.Request) []string {
-	if jwtClaims, ok := r.Context().Value(util.SessionUserKey).(jwt.MapClaims); ok {
+	if jwtClaims, ok := r.Context().Value(SessionUserKey).(jwt.MapClaims); ok {
 		return jwtClaims["uid"].([]string)
 	}
 	return make([]string, 0)
