@@ -50,6 +50,7 @@ Ultralight Go web framework for writing microservices. It improves on popular ht
 		ID             bson.ObjectId `json:"id"`
 		Title          string        `json:"title"`
 		PublishedDate  string        `json:"date_published"`
+	}
 	```
     
     - Define route
