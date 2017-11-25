@@ -1,5 +1,36 @@
 # Aliz
-Ultralight Go web framework for writing microservices
+Ultralight Go web framework for writing microservices. 
+
+## Features 
+* Simple and consistent controller spec. Return aliz.Response type from the controller. JSON will be return to the client.
+	```go
+	func SignUp(w http.ResponseWriter, r *http.Request) aliz.Response {
+		us := pweb.RequestBody(r).(*User)
+		
+		savedUser, err := service.SaveUser(us)
+		if err != nil {
+			return aliz.ErrorResponse(err)
+		}
+	
+		return aliz.DataResponse(savedUser)
+	}
+	```
+	Each controller can either return an error or success API response. JSON output that is written to the client is:
+	For, ErrorResponse(err)
+		```JSON
+			{
+				"status" : "ERROR",
+				"error"  : "<api error message>",
+				"data"   : "error data, if name"
+			}
+		```
+	For, DataResponse(data)
+		```JSON
+			{
+				"status" : "OK",
+				"data"   : {}
+			}
+		```
 
 #### Sample API service web.go
 
