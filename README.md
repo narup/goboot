@@ -55,7 +55,7 @@ Ultralight Go web framework for writing microservices. It improves on popular ht
     
     - Define route
 	```go
-    jsonHandler := aliz.JSONBodyHandler(ctx, User{})
+    jsonHandler := aliz.JSONBodyHandler(ctx, newsArticle{})
     r.Post("/api/v1/articles", chain.Append(jsonHandler).ThenFunc(aliz.ResponseHandler(SaveNewsArticle)))
     ```
 	
