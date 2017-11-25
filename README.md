@@ -1,7 +1,18 @@
 # Aliz
-Ultralight Go web framework for writing microservices. It improves on popular httprouter
+Ultralight Go web framework for writing microservices. It improves on popular httprouter (github.com/julienschmidt/httprouter). 
 
 ## Features 
+* Easy routes setup with https://github.com/justinas/alice - painless middleware chaining
+
+    ```go
+    ctx := context.Background()
+    panicHandler := &AppPanicHandler{}
+
+    chain := alice.New(aliz.ClearHandler, aliz.LoggingHandler)
+    chain.Append(aliz.RecoverHandler(ctx, panicHandler))
+
+    r.Get("/", chain.ThenFunc(Index))
+    ```
 * Simple and consistent controller spec. Just return aliz.Response type from the controller
 	```go
 	func SignUp(w http.ResponseWriter, r *http.Request) aliz.Response {
@@ -32,7 +43,29 @@ Ultralight Go web framework for writing microservices. It improves on popular ht
 				"data"   : {"name":"Puran S", "email":"puran@myemail.com"}
 			}
 		```
-
+* Simple JSON POST body handler marshal's your JSON request to go struct 
+	- Define your request data struct
+	```go
+	type newsArticle struct {
+		ID             bson.ObjectId `json:"id"`
+		Title          string        `json:"title"`
+		PublishedDate  string        `json:"date_published"`
+	```
+    
+    - Define route
+	```go
+    jsonHandler := aliz.JSONBodyHandler(ctx, User{})
+    r.Post("/api/v1/articles", chain.Append(jsonHandler).ThenFunc(aliz.ResponseHandler(SaveNewsArticle)))
+    ```
+	
+    - POST request handler
+	```go
+    func SaveNewsArticle(w http.ResponseWriter, r *http.Request) aliz.Response {
+		newArtcile := aliz.RequestBody(r).(*newsArticle)
+        ........
+    }
+    ```
+    
 * Supports API Key or JWT Auth Token for security
 	* For API Key based security append the middleware ```APIKeyAuth``` chain
 	```go
