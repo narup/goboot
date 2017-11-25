@@ -77,7 +77,7 @@ Ultralight Go web framework for writing microservices. It improves on popular ht
     ```
 
 
-#### Sample API service web.go
+#### Sample API service web.go putting it all together:
 
 ```go
  package main
