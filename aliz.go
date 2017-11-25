@@ -130,7 +130,7 @@ func DefaultRouter(ctx context.Context) *Router {
 //ServeHTTP handler function that takes care of headers
 func (ar *Router) ServeHTTP(w http.ResponseWriter, req *http.Request) {
 	origin := req.Header.Get("Origin")
-	if origin == "" {
+	if origin == "" || origin == "*" {
 		w.Header().Set("Access-Control-Allow-Origin", "*")
 	} else {
 		if strings.Contains(ar.AllowedOrigins, origin) {
