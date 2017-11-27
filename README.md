@@ -29,27 +29,27 @@ Ultralight Go web framework for bootstrapping microservices. It's built on top o
 	Each controller can either return an error or success API response. JSON output that is written to the client is:
     
 	* ErrorResponse
-		```JSON
-			{
-				"status" : "ERROR",
-				"error"  : "<api error message>",
-				"data"   : "error data, if name"
-			}
-		```
+	```JSON
+	{
+	    "status" : "ERROR",
+	    "error"  : "<api error message>",
+	    "data"   : "error data, if name"
+	}
+	```
 	* DataResponse
-		```JSON
-			{
-				"status" : "OK",
-				"data"   : {"name":"Puran S", "email":"puran@myemail.com"}
-			}
-		```
+	```JSON
+	{
+	    "status" : "OK",
+	    "data"   : {"name":"Puran S", "email":"puran@myemail.com"}
+	}
+	```
 * Simple JSON POST body handler marshal's your JSON request to go struct 
      - Define your request data struct
      ```go
      type newsArticle struct {
-	ID  	       bson.ObjectId `json:"id"`
-	Title          string        `json:"title"`
-	PublishedDate  string        `json:"date_published"`
+	 ID  	        bson.ObjectId `json:"id"`
+	 Title          string        `json:"title"`
+	 PublishedDate  string        `json:"date_published"`
      }
      ```
     
