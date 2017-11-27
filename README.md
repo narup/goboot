@@ -47,9 +47,9 @@ Ultralight Go web framework for bootstrapping microservices. It's built on top o
      - Define your request data struct
      ```go
      type newsArticle struct {
-	 ID  	        bson.ObjectId `json:"id"`
-	 Title          string        `json:"title"`
-	 PublishedDate  string        `json:"date_published"`
+		ID            bson.ObjectId `json:"id"`
+		Title         string        `json:"title"`
+		PublishedDate string        `json:"date_published"`
      }
      ```
     
@@ -62,8 +62,8 @@ Ultralight Go web framework for bootstrapping microservices. It's built on top o
     - POST request handler
     ```go
     func SaveNewsArticle(w http.ResponseWriter, r *http.Request) aliz.Response {
-	newArtcile := aliz.RequestBody(r).(*newsArticle)
-        ........
+	  newArtcile := aliz.RequestBody(r).(*newsArticle)
+          ........
     }
     ```
     
