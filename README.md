@@ -1,5 +1,5 @@
 # Aliz
-Ultralight Go web framework for writing microservices. It improves on popular httprouter (github.com/julienschmidt/httprouter). 
+Ultralight Go web framework for bootstrapping microservices. It's built on top of popular httprouter (github.com/julienschmidt/httprouter) with all necessary middlewares hooked to get you started easily. 
 
 ## Features 
 * Easy routes setup with https://github.com/justinas/alice - painless middleware chaining
@@ -44,32 +44,32 @@ Ultralight Go web framework for writing microservices. It improves on popular ht
 			}
 		```
 * Simple JSON POST body handler marshal's your JSON request to go struct 
-	- Define your request data struct
-	```go
-	type newsArticle struct {
-		ID             bson.ObjectId `json:"id"`
-		Title          string        `json:"title"`
-		PublishedDate  string        `json:"date_published"`
-	}
-	```
+     - Define your request data struct
+     ```go
+     type newsArticle struct {
+	ID  	       bson.ObjectId `json:"id"`
+	Title          string        `json:"title"`
+	PublishedDate  string        `json:"date_published"`
+     }
+     ```
     
     - Define route
-	```go
+    ```go
     jsonHandler := aliz.JSONBodyHandler(ctx, newsArticle{})
     r.Post("/api/v1/articles", chain.Append(jsonHandler).ThenFunc(aliz.ResponseHandler(SaveNewsArticle)))
     ```
 	
     - POST request handler
-	```go
+    ```go
     func SaveNewsArticle(w http.ResponseWriter, r *http.Request) aliz.Response {
-		newArtcile := aliz.RequestBody(r).(*newsArticle)
+	newArtcile := aliz.RequestBody(r).(*newsArticle)
         ........
     }
     ```
     
 * Supports API Key or JWT Auth Token for security
-	* For API Key based security append the middleware ```APIKeyAuth``` chain
-	```go
+    * For API Key based security append the middleware ```APIKeyAuth``` chain
+    ```go
 	apiKeyAuthC := chain.Append(aliz.APIKeyAuth(ctx, apiErrHandler))
     ```
     * For auth token based security use ```JWTAuthHandler```
@@ -80,7 +80,7 @@ Ultralight Go web framework for writing microservices. It improves on popular ht
 
 #### Sample API service web.go putting it all together:
 
-```go
+ ```go
  package main
 
  import (
