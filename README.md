@@ -1,8 +1,8 @@
 # Aliz
-Ultralight Go web framework for bootstrapping microservices. It's built on top of popular httprouter (github.com/julienschmidt/httprouter) with all necessary middlewares hooked to get you started easily. 
+Ultralight Go web framework for bootstrapping microservices. It's built on top of popular httprouter [httprouter](github.com/julienschmidt/httprouter) with all the necessary middlewares hooked to get you started easily. 
 
 ## Features 
-* Easy routes setup with https://github.com/justinas/alice - painless middleware chaining
+* Easy routes setup with [alice middleware chaining](https://github.com/justinas/alice)
 
     ```go
     ctx := context.Background()
