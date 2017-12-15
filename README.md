@@ -17,7 +17,7 @@ Ultralight Go web framework for bootstrapping microservices. It's built on top o
 * Simple and consistent controller spec. Just return aliz.Response type from the controller
 	```go
 	func SignUp(w http.ResponseWriter, r *http.Request) aliz.Response {
-		us := pweb.RequestBody(r).(*User)
+		us := aliz.RequestBody(r).(*User)
 		
 		savedUser, err := service.SaveUser(us)
 		if err != nil {
@@ -102,7 +102,7 @@ Ultralight Go web framework for bootstrapping microservices. It's built on top o
  }
 
  func SignUp(w http.ResponseWriter, r *http.Request) aliz.Response {
-	us := pweb.RequestBody(r).(*User)
+	us := aliz.RequestBody(r).(*User)
 	
 	savedUser, err := service.SaveUser(us)
 	if err != nil {
