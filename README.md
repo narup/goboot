@@ -1,5 +1,5 @@
 # Aliz 
-## ![MIT Licence](https://badges.frapsoft.com/os/mit/mit.svg?v=103)]![Open Source Love](https://badges.frapsoft.com/os/v2/open-source.svg?v=103)]
+## ![MIT Licence](https://badges.frapsoft.com/os/mit/mit.svg?v=103)![Open Source Love](https://badges.frapsoft.com/os/v2/open-source.svg?v=103)
 Ultralight Go web framework for bootstrapping microservices. It's built on top of popular httprouter [httprouter](github.com/julienschmidt/httprouter) with all the necessary middlewares hooked to get you started easily. 
 
 ## Features 
