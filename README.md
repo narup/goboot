@@ -9,22 +9,22 @@ Ultralight Go web framework for bootstrapping microservices. It's built on top o
     ctx := context.Background()
     panicHandler := &AppPanicHandler{}
 
-    chain := alice.New(go.ClearHandler, go.LoggingHandler)
-    chain.Append(go.RecoverHandler(ctx, panicHandler))
+    chain := alice.New(goboot.ClearHandler, goboot.LoggingHandler)
+    chain.Append(goboot.RecoverHandler(ctx, panicHandler))
 
     r.Get("/", chain.ThenFunc(Index))
     ```
-* Simple and consistent controller spec. Just return go.Response type from the controller
+* Simple and consistent controller spec. Just return goboot.Response type from the controller
 	```go
-	func SignUp(w http.ResponseWriter, r *http.Request) go.Response {
-		us := go.RequestBody(r).(*User)
+	func SignUp(w http.ResponseWriter, r *http.Request) goboot.Response {
+		us := goboot.RequestBody(r).(*User)
 		
 		savedUser, err := service.SaveUser(us)
 		if err != nil {
-			return go.ErrorResponse(err)
+			return goboot.ErrorResponse(err)
 		}
 	
-		return go.DataResponse(savedUser)
+		return goboot.DataResponse(savedUser)
 	}
 	```
 	Each controller can either return an error or success API response. JSON output that is written to the client is:
@@ -56,14 +56,14 @@ Ultralight Go web framework for bootstrapping microservices. It's built on top o
     
     - Define route
     ```go
-    jsonHandler := go.JSONBodyHandler(ctx, newsArticle{})
-    r.Post("/api/v1/articles", chain.Append(jsonHandler).ThenFunc(go.ResponseHandler(SaveNewsArticle)))
+    jsonHandler := goboot.JSONBodyHandler(ctx, newsArticle{})
+    r.Post("/api/v1/articles", chain.Append(jsonHandler).ThenFunc(goboot.ResponseHandler(SaveNewsArticle)))
     ```
 	
     - POST request handler
     ```go
-    func SaveNewsArticle(w http.ResponseWriter, r *http.Request) go.Response {
-	  newArtcile := go.RequestBody(r).(*newsArticle)
+    func SaveNewsArticle(w http.ResponseWriter, r *http.Request) goboot.Response {
+	  newArtcile := goboot.RequestBody(r).(*newsArticle)
           ........
     }
     ```
@@ -71,11 +71,11 @@ Ultralight Go web framework for bootstrapping microservices. It's built on top o
 * Supports API Key or JWT Auth Token for security
     * For API Key based security append the middleware ```APIKeyAuth``` chain
     ```go
-	apiKeyAuthC := chain.Append(go.APIKeyAuth(ctx, apiErrHandler))
+	apiKeyAuthC := chain.Append(goboot.APIKeyAuth(ctx, apiErrHandler))
     ```
     * For auth token based security use ```JWTAuthHandler```
     ```go
-    jwtChain := chain.Append(go.JWTAuthHandler(ctx, apiErrHandler))
+    jwtChain := chain.Append(goboot.JWTAuthHandler(ctx, apiErrHandler))
     ```
 
 
@@ -101,31 +101,31 @@ Ultralight Go web framework for bootstrapping microservices. It's built on top o
      fmt.Fprint(w, "Welcome!\n")
  }
 
- func SignUp(w http.ResponseWriter, r *http.Request) go.Response {
-	us := go.RequestBody(r).(*User)
+ func SignUp(w http.ResponseWriter, r *http.Request) goboot.Response {
+	us := goboot.RequestBody(r).(*User)
 	
 	savedUser, err := service.SaveUser(us)
 	if err != nil {
-	    return go.ErrorResponse(err)
+	    return goboot.ErrorResponse(err)
 	}
 	
-	return go.DataResponse(savedUser)
+	return goboot.DataResponse(savedUser)
  }
  
- func handlers() *go.Router {
+ func handlers() *goboot.Router {
      ctx := context.Background()
      var panicHandler = &AppPanicHandler{}
    
-     chain := alice.New(go.ClearHandler, go.LoggingHandler)
-     chain.Append(go.RecoverHandler(ctx, panicHandler))
+     chain := alice.New(goboot.ClearHandler, goboot.LoggingHandler)
+     chain.Append(goboot.RecoverHandler(ctx, panicHandler))
 
-     r := go.DefaultRouter(ctx)
+     r := goboot.DefaultRouter(ctx)
      
      //setup routes
      r.Get("/", chain.ThenFunc(Index))
      
-     userJSONHandler := go.JSONBodyHandler(ctx, User{})
-     r.Post("/api/v1/users", chain.Append(userJSONHandler).ThenFunc(go.ResponseHandler(SignUp)))
+     userJSONHandler := goboot.JSONBodyHandler(ctx, User{})
+     r.Post("/api/v1/users", chain.Append(userJSONHandler).ThenFunc(goboot.ResponseHandler(SignUp)))
  }
  
  func main() {
