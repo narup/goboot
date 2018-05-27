@@ -1,8 +1,8 @@
-// Package aliz containing the core middleware functions for JWT and API key based authentication
+// Package goboot containing the core middleware functions for JWT and API key based authentication
 // JSON body parser, request logger, recover handler and more.
 // Copyright (c) Puran  2017. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
-package aliz
+package goboot
 
 import (
 	"context"

@@ -1,4 +1,4 @@
-# Aliz 
+# goboot 
 ## ![MIT Licence](https://badges.frapsoft.com/os/mit/mit.svg?v=103) ![Open Source Love](https://badges.frapsoft.com/os/v2/open-source.svg?v=103)
 Ultralight Go web framework for bootstrapping microservices. It's built on top of popular httprouter [httprouter](github.com/julienschmidt/httprouter) with all the necessary middlewares hooked to get you started easily. 
 
@@ -9,22 +9,22 @@ Ultralight Go web framework for bootstrapping microservices. It's built on top o
     ctx := context.Background()
     panicHandler := &AppPanicHandler{}
 
-    chain := alice.New(aliz.ClearHandler, aliz.LoggingHandler)
-    chain.Append(aliz.RecoverHandler(ctx, panicHandler))
+    chain := alice.New(go.ClearHandler, go.LoggingHandler)
+    chain.Append(go.RecoverHandler(ctx, panicHandler))
 
     r.Get("/", chain.ThenFunc(Index))
     ```
-* Simple and consistent controller spec. Just return aliz.Response type from the controller
+* Simple and consistent controller spec. Just return go.Response type from the controller
 	```go
-	func SignUp(w http.ResponseWriter, r *http.Request) aliz.Response {
-		us := aliz.RequestBody(r).(*User)
+	func SignUp(w http.ResponseWriter, r *http.Request) go.Response {
+		us := go.RequestBody(r).(*User)
 		
 		savedUser, err := service.SaveUser(us)
 		if err != nil {
-			return aliz.ErrorResponse(err)
+			return go.ErrorResponse(err)
 		}
 	
-		return aliz.DataResponse(savedUser)
+		return go.DataResponse(savedUser)
 	}
 	```
 	Each controller can either return an error or success API response. JSON output that is written to the client is:
@@ -56,14 +56,14 @@ Ultralight Go web framework for bootstrapping microservices. It's built on top o
     
     - Define route
     ```go
-    jsonHandler := aliz.JSONBodyHandler(ctx, newsArticle{})
-    r.Post("/api/v1/articles", chain.Append(jsonHandler).ThenFunc(aliz.ResponseHandler(SaveNewsArticle)))
+    jsonHandler := go.JSONBodyHandler(ctx, newsArticle{})
+    r.Post("/api/v1/articles", chain.Append(jsonHandler).ThenFunc(go.ResponseHandler(SaveNewsArticle)))
     ```
 	
     - POST request handler
     ```go
-    func SaveNewsArticle(w http.ResponseWriter, r *http.Request) aliz.Response {
-	  newArtcile := aliz.RequestBody(r).(*newsArticle)
+    func SaveNewsArticle(w http.ResponseWriter, r *http.Request) go.Response {
+	  newArtcile := go.RequestBody(r).(*newsArticle)
           ........
     }
     ```
@@ -71,11 +71,11 @@ Ultralight Go web framework for bootstrapping microservices. It's built on top o
 * Supports API Key or JWT Auth Token for security
     * For API Key based security append the middleware ```APIKeyAuth``` chain
     ```go
-	apiKeyAuthC := chain.Append(aliz.APIKeyAuth(ctx, apiErrHandler))
+	apiKeyAuthC := chain.Append(go.APIKeyAuth(ctx, apiErrHandler))
     ```
     * For auth token based security use ```JWTAuthHandler```
     ```go
-    jwtChain := chain.Append(aliz.JWTAuthHandler(ctx, apiErrHandler))
+    jwtChain := chain.Append(go.JWTAuthHandler(ctx, apiErrHandler))
     ```
 
 
@@ -85,7 +85,7 @@ Ultralight Go web framework for bootstrapping microservices. It's built on top o
  package main
 
  import (
-     "github.com/narup/aliz"
+     "github.com/narup/go"
      "net/http"
      "fmt"
  )
@@ -101,31 +101,31 @@ Ultralight Go web framework for bootstrapping microservices. It's built on top o
      fmt.Fprint(w, "Welcome!\n")
  }
 
- func SignUp(w http.ResponseWriter, r *http.Request) aliz.Response {
-	us := aliz.RequestBody(r).(*User)
+ func SignUp(w http.ResponseWriter, r *http.Request) go.Response {
+	us := go.RequestBody(r).(*User)
 	
 	savedUser, err := service.SaveUser(us)
 	if err != nil {
-	    return aliz.ErrorResponse(err)
+	    return go.ErrorResponse(err)
 	}
 	
-	return aliz.DataResponse(savedUser)
+	return go.DataResponse(savedUser)
  }
  
- func handlers() *aliz.Router {
+ func handlers() *go.Router {
      ctx := context.Background()
      var panicHandler = &AppPanicHandler{}
    
-     chain := alice.New(aliz.ClearHandler, aliz.LoggingHandler)
-     chain.Append(aliz.RecoverHandler(ctx, panicHandler))
+     chain := alice.New(go.ClearHandler, go.LoggingHandler)
+     chain.Append(go.RecoverHandler(ctx, panicHandler))
 
-     r := aliz.DefaultRouter(ctx)
+     r := go.DefaultRouter(ctx)
      
      //setup routes
      r.Get("/", chain.ThenFunc(Index))
      
-     userJSONHandler := aliz.JSONBodyHandler(ctx, User{})
-     r.Post("/api/v1/users", chain.Append(userJSONHandler).ThenFunc(aliz.ResponseHandler(SignUp)))
+     userJSONHandler := go.JSONBodyHandler(ctx, User{})
+     r.Post("/api/v1/users", chain.Append(userJSONHandler).ThenFunc(go.ResponseHandler(SignUp)))
  }
  
  func main() {

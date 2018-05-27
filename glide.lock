@@ -1,0 +1,10 @@
+hash: 8c17d5317bd46f13798d5362047d7833a0b869ac1fcc1fdcf3069720ec12c555
+updated: 2018-05-26T21:04:26.792752-07:00
+imports:
+- name: github.com/dgrijalva/jwt-go
+  version: 06ea1031745cb8b3dab3f6a236daf2b0aa468b7e
+- name: github.com/gorilla/context
+  version: 08b5f424b9271eedf6f9f0ce86cb9396ed337a42
+- name: github.com/julienschmidt/httprouter
+  version: 8c199fb6259ffc1af525cc3ad52ee60ba8359669
+testImports: []

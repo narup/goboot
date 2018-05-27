@@ -1,0 +1,8 @@
+package: github.com/narup/goboot
+import:
+- package: github.com/dgrijalva/jwt-go
+  version: v3.2.0
+- package: github.com/gorilla/context
+  version: v1.1.1
+- package: github.com/julienschmidt/httprouter
+  version: v1.1

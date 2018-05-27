@@ -1,14 +1,14 @@
-// Package aliz containing the custom router which is a wrapper around httprouter (github.com/julienschmidt/httprouter)
+// Package goboot containing the custom router which is a wrapper around httprouter (github.com/julienschmidt/httprouter)
 // to make it compatible with http.Handler function. It uses wrapHandler function to wraps the middleware functions
 // implementing http.Handler into a httprouter.Handler function.
 //
-// Example to setup routes using aliz.Router using alice(https://github.com/justinas/alice)
+// Example to setup routes using go.Router using alice(https://github.com/justinas/alice)
 // middleware chaining:
 //
 //  package main
 //
 //  import (
-//      "github.com/narup/aliz"
+//      "github.com/narup/goboot"
 //      "net/http"
 //      "fmt"
 //  )
@@ -26,14 +26,14 @@
 //
 //  var panicHandler = &AppPanicHandler{}
 //  ctx := context.Background()
-//  chain := alice.New(aliz.ClearHandler, aliz.LoggingHandler)
-// 	chain.Append(aliz.RecoverHandler(ctx, panicHandler))
+//  chain := alice.New(go.ClearHandler, go.LoggingHandler)
+// 	chain.Append(go.RecoverHandler(ctx, panicHandler))
 //
-//  r := aliz.DefaultRouter(ctx)
+//  r := go.DefaultRouter(ctx)
 //  r.Get("/", chain.ThenFunc(Index))
 //
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
-package aliz
+package goboot
 
 import (
 	"context"
@@ -115,7 +115,7 @@ type Router struct {
 	AllowedHeaders string
 }
 
-// DefaultRouter returns new aliz.Router with default settings
+// DefaultRouter returns new go.Router with default settings
 func DefaultRouter(ctx context.Context) *Router {
 	ar := new(Router)
 	ar.Ctx = ctx
